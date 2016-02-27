@@ -56,6 +56,14 @@
                                     <action selector="getVersion:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vWe-yM-4b4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYv-tR-mln">
+                                <rect key="frame" x="310" y="70" width="45" height="30"/>
+                                <animations/>
+                                <state key="normal" title="下一页"/>
+                                <connections>
+                                    <segue destination="Fip-tI-c4Y" kind="show" id="RYe-ds-dGa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -64,10 +72,12 @@
                             <constraint firstItem="hEc-my-nDK" firstAttribute="top" secondItem="Gbg-KY-eor" secondAttribute="bottom" constant="10" id="5Zs-5p-tVo"/>
                             <constraint firstAttribute="trailing" secondItem="qbw-5m-lBW" secondAttribute="trailing" id="9zL-jM-Pxw"/>
                             <constraint firstItem="Gbg-KY-eor" firstAttribute="top" secondItem="PNb-OQ-Ru1" secondAttribute="bottom" constant="15" id="Bve-tY-Af9"/>
+                            <constraint firstItem="OYv-tR-mln" firstAttribute="centerY" secondItem="PNb-OQ-Ru1" secondAttribute="centerY" id="Ene-yM-Jlk"/>
                             <constraint firstItem="qbw-5m-lBW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="IIk-Dr-sw8"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="qbw-5m-lBW" secondAttribute="bottom" id="JLg-PT-FX4"/>
                             <constraint firstItem="DqV-gp-HNx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VNa-0Z-I51"/>
                             <constraint firstItem="PNb-OQ-Ru1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="YIn-p2-NCL"/>
+                            <constraint firstAttribute="trailing" secondItem="OYv-tR-mln" secondAttribute="trailing" constant="20" id="iME-FL-bhi"/>
                             <constraint firstItem="qbw-5m-lBW" firstAttribute="top" secondItem="hEc-my-nDK" secondAttribute="bottom" constant="60" id="nPy-5H-Iu7"/>
                             <constraint firstItem="PNb-OQ-Ru1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oOy-sE-unC"/>
                             <constraint firstItem="Gbg-KY-eor" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vsm-m1-PT5"/>
@@ -81,7 +91,72 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="150.5" y="391.5"/>
+            <point key="canvasLocation" x="-6.5" y="391.5"/>
+        </scene>
+        <!--Battery View Controller-->
+        <scene sceneID="SKw-nf-6vL">
+            <objects>
+                <viewController id="Fip-tI-c4Y" customClass="BatteryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3hc-cI-ty5"/>
+                        <viewControllerLayoutGuide type="bottom" id="L8G-ug-DCI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zcA-3J-XWw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aer-P8-7ye">
+                                <rect key="frame" x="50" y="40" width="30" height="30"/>
+                                <animations/>
+                                <state key="normal" title="返回"/>
+                                <connections>
+                                    <action selector="back:" destination="Fip-tI-c4Y" eventType="touchUpInside" id="Puc-Kt-1NC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTB-M3-4vF">
+                                <rect key="frame" x="158" y="120" width="60" height="30"/>
+                                <animations/>
+                                <state key="normal" title="获取电量"/>
+                                <connections>
+                                    <action selector="getBattery:" destination="Fip-tI-c4Y" eventType="touchUpInside" id="ZH3-AW-8Js"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前电量：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abl-F0-5Yw">
+                                <rect key="frame" x="125" y="190" width="85" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFV-lk-xNX">
+                                <rect key="frame" x="210" y="190" width="34" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Aer-P8-7ye" firstAttribute="leading" secondItem="zcA-3J-XWw" secondAttribute="leading" constant="50" id="DFG-KP-qei"/>
+                            <constraint firstItem="dFV-lk-xNX" firstAttribute="centerY" secondItem="Abl-F0-5Yw" secondAttribute="centerY" id="Ead-ZI-ylL"/>
+                            <constraint firstItem="hTB-M3-4vF" firstAttribute="centerX" secondItem="zcA-3J-XWw" secondAttribute="centerX" id="bT4-hY-nY8"/>
+                            <constraint firstItem="hTB-M3-4vF" firstAttribute="top" secondItem="3hc-cI-ty5" secondAttribute="bottom" constant="100" id="cBG-Mw-ifO"/>
+                            <constraint firstItem="Abl-F0-5Yw" firstAttribute="centerX" secondItem="zcA-3J-XWw" secondAttribute="centerX" constant="-20" id="ehD-cl-LGw"/>
+                            <constraint firstItem="Aer-P8-7ye" firstAttribute="top" secondItem="3hc-cI-ty5" secondAttribute="bottom" constant="20" id="mju-tX-ASi"/>
+                            <constraint firstItem="Abl-F0-5Yw" firstAttribute="top" secondItem="hTB-M3-4vF" secondAttribute="bottom" constant="40" id="q8X-au-OFV"/>
+                            <constraint firstItem="dFV-lk-xNX" firstAttribute="leading" secondItem="Abl-F0-5Yw" secondAttribute="trailing" id="yCk-3a-spL"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="batteryLabel" destination="dFV-lk-xNX" id="Ewa-hQ-l8N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Sw-rz-Mu2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="440.5" y="391.5"/>
         </scene>
     </scenes>
 </document>

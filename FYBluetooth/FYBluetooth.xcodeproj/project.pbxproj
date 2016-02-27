@@ -15,6 +15,7 @@
 		8E268CC91C4E1DB500EAECB1 /* BluetoothHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E268CC81C4E1DB500EAECB1 /* BluetoothHeader.m */; };
 		8E268CCC1C4E1DD400EAECB1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E268CCB1C4E1DD400EAECB1 /* ViewController.m */; };
 		8E268CCE1C4E1E0400EAECB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E268CCD1C4E1E0400EAECB1 /* Main.storyboard */; };
+		8ED5FFD71C8191FF0051C489 /* BatteryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED5FFD61C8191FF0051C489 /* BatteryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		8E268CCA1C4E1DD400EAECB1 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8E268CCB1C4E1DD400EAECB1 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8E268CCD1C4E1E0400EAECB1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8ED5FFD51C8191FF0051C489 /* BatteryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryViewController.h; sourceTree = "<group>"; };
+		8ED5FFD61C8191FF0051C489 /* BatteryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 				8E268CA61C4E1D8C00EAECB1 /* AppDelegate.m */,
 				8E268CCA1C4E1DD400EAECB1 /* ViewController.h */,
 				8E268CCB1C4E1DD400EAECB1 /* ViewController.m */,
+				8ED5FFD51C8191FF0051C489 /* BatteryViewController.h */,
+				8ED5FFD61C8191FF0051C489 /* BatteryViewController.m */,
 				8E268CC71C4E1DB500EAECB1 /* BluetoothHeader.h */,
 				8E268CC81C4E1DB500EAECB1 /* BluetoothHeader.m */,
 				8E268CCD1C4E1E0400EAECB1 /* Main.storyboard */,
@@ -216,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ED5FFD71C8191FF0051C489 /* BatteryViewController.m in Sources */,
 				8E268CA71C4E1D8C00EAECB1 /* AppDelegate.m in Sources */,
 				8E268CA41C4E1D8C00EAECB1 /* main.m in Sources */,
 				8E268CCC1C4E1DD400EAECB1 /* ViewController.m in Sources */,
@@ -400,6 +406,7 @@
 				8E268CC31C4E1D8C00EAECB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E268CC41C4E1D8C00EAECB1 /* Build configuration list for PBXNativeTarget "FYBluetoothTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +415,7 @@
 				8E268CC61C4E1D8C00EAECB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

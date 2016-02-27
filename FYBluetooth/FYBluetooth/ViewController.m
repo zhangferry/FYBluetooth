@@ -24,9 +24,15 @@
     [super viewDidLoad];
     self.header = [BluetoothHeader sharedInstance];
     [self.header initDevice];
-    self.header.delegate = self;
-   
+    
     self.string = [NSMutableString string];
+}
+
+//防止返回时代理覆盖，要重新挂代理
+- (void)viewWillAppear:(BOOL)animated{
+    
+    self.header.delegate = self;
+    
 }
 
 - (IBAction)scan:(id)sender {
@@ -70,7 +76,6 @@
     NSLog(@"连接成功");
     [_string appendString:@"连接成功\n"];
     _textView.text = _string;
-    
 }
 
 //连接失败
@@ -89,6 +94,12 @@
 - (void)deviceIdentifier:(NSString *)identifier{
     self.identifider = identifier;
     [self.string appendFormat:@"发现设备：%@\n",self.identifider];
+    self.textView.text = self.string;
+}
+
+//获取硬件版本
+- (void)onGetVersion:(NSString *)version{
+    [self.string appendFormat:@"硬件版本：%@\n",version];
     self.textView.text = self.string;
 }
 

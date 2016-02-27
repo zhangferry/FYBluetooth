@@ -121,14 +121,27 @@
 //获取设备版本号
 - (void) getVersion {
     NSData *data = [self hexToBytes:@"088573"];
-    [self.peripheral writeValue:data forCharacteristic:self.write type:CBCharacteristicWriteWithoutResponse];
+    if (self.write) {
+        [self.peripheral writeValue:data forCharacteristic:self.write type:CBCharacteristicWriteWithoutResponse];
+    }
+    
+}
+
+//获取电量
+- (void) getBattery{
+
+    NSData *data = [self hexToBytes:@"88096F"];
+    if (self.write) {
+        [self.peripheral writeValue:data forCharacteristic:self.write type:CBCharacteristicWriteWithoutResponse];
+    }
+    
 }
 
 
 #pragma mark - CBCentralManagerDelegate方法
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
     NSLog(@"%@", [peripheral.identifier UUIDString]);
-    //筛选设备名
+    //筛选设备名，换成自己的设备名称
     if([peripheral.name rangeOfString:@"MI"].location != NSNotFound){
         NSLog(@"didDiscoverPeripheral");
         
@@ -228,6 +241,27 @@
         
         //根据硬件协议进行解析
         
+        NSData *cmdData = [data subdataWithRange:NSMakeRange(0, 2)];
+        if ([cmdData isEqualToData:[self hexToBytes:CMD_SEND_BATTERYLEVEL_REMIND]]) {
+            //设备电量
+            unsigned char *bs = (unsigned char *)[[data subdataWithRange:NSMakeRange(2, 1)] bytes];
+            unsigned int w1 = *bs;
+            if ([self.delegate respondsToSelector:@selector(onGetBattery:)]) {
+                [self.delegate onGetBattery:w1*20];
+            }
+
+            
+        }else if ([cmdData isEqualToData:[self hexToBytes:CMD_SW_REV_INFO]]){
+            //设备版本
+            unsigned char *bs = (unsigned char *)[[data subdataWithRange:NSMakeRange(2, 1)] bytes];
+            unsigned int w1 = *bs;
+            int version = [[self ToHex:w1] intValue];
+            if ([self.delegate respondsToSelector:@selector(onGetVersion:)]) {
+                [self.delegate onGetVersion:[NSString stringWithFormat:@"v%d.%d",version/10,version%10]];
+            }
+
+        }
+        
     }
 }
 
@@ -246,5 +280,45 @@
     }
     return data;
 }
+
+//将十进制转化为十六进制
+- (NSString *)ToHex:(int)tmpid
+{
+    NSString *nLetterValue;
+    NSString *str =@"";
+    int ttmpig;
+    for (int i = 0; i<9; i++) {
+        ttmpig=tmpid%16;
+        tmpid=tmpid/16;
+        switch (ttmpig)
+        {
+            case 10:
+                nLetterValue =@"A";break;
+            case 11:
+                nLetterValue =@"B";break;
+            case 12:
+                nLetterValue =@"C";break;
+            case 13:
+                nLetterValue =@"D";break;
+            case 14:
+                nLetterValue =@"E";break;
+            case 15:
+                nLetterValue =@"F";break;
+            default:
+                nLetterValue = [NSString stringWithFormat:@"%u",ttmpig];
+                
+        }
+        str = [nLetterValue stringByAppendingString:str];
+        if (tmpid == 0) {
+            break;
+        }
+    }
+    if(str.length == 1){
+        return [NSString stringWithFormat:@"0%@",str];
+    }else{
+        return str;
+    }
+}
+
 
 @end

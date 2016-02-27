@@ -9,11 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+/**
+ *  发送手环电量百分比
+ */
+#define CMD_SEND_BATTERYLEVEL_REMIND @"2101"
+/**
+ *  版本信息
+ */
+#define CMD_SW_REV_INFO @"8001"
+
 #define ST_SERVICE_UUID @"D100"
 #define ST_CHARACTERISTIC_UUID_WRITE_AND_NOTIFY @"8D00"
 #define ST_CHARACTERISTIC_UUID_READ @"8A00"
 
 @protocol FYBluetoothDelegate <NSObject>
+
+@optional
 
 //开始扫描
 - (void) onScanStart;
@@ -32,6 +43,11 @@
 
 //连接断开
 - (void) onConnectBreak;
+
+- (void) onGetVersion:(NSString *)version;
+
+//获取电量
+- (void) onGetBattery:(int)battery;
 
 //获取设备标示
 - (void)deviceIdentifier:(NSString *)identifier;
@@ -62,6 +78,9 @@
 
 //获取设备版本号
 - (void) getVersion;
+
+//获取电量
+- (void) getBattery;
 
 
 @end
