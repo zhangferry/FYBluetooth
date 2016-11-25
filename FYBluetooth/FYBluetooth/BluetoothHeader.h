@@ -17,6 +17,8 @@
  *  版本信息
  */
 #define CMD_SW_REV_INFO @"8001"
+//存储设置uuid的字段
+#define ST_DEVICEIDENTIFI_ID @"ST_DEVICEIDENTIFI_ID"
 
 #define ST_SERVICE_UUID @"D100"
 #define ST_CHARACTERISTIC_UUID_WRITE_AND_NOTIFY @"8D00"

@@ -42,8 +42,32 @@
 
 //扫描设备
 - (void)scan {
-    [self.centralManager scanForPeripheralsWithServices:nil options:nil];
-    NSLog(@"scanDevice");
+    
+    NSLog(@"正在扫描连接。。。");
+    NSUserDefaults *userDeault = [NSUserDefaults standardUserDefaults];
+    NSString *uuidString = [userDeault objectForKey:ST_DEVICEIDENTIFI_ID];
+    NSArray *peripherals;
+    if (uuidString) {
+        //如果绑定过设备，就用绑定的标示uuid进行扫描
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:uuidString];
+        peripherals = [self.centralManager retrievePeripheralsWithIdentifiers:@[uuid]];
+        
+    }else{
+        //如果未绑定过设置，通过serviceUUID进行扫描
+        peripherals = [self.centralManager retrieveConnectedPeripheralsWithServices:@[[CBUUID UUIDWithString:ST_SERVICE_UUID]]];
+    }
+    if (peripherals > 0) {
+        //存在已连接的设备
+        NSLog(@"已连接设备：%@",peripherals);
+        CBPeripheral *peripheral = [peripherals firstObject];
+        peripheral.delegate = self;
+        self.peripheral = peripheral;//需要保存外设值，才能发起连接
+        
+        [self.centralManager connectPeripheral:self.peripheral options:nil];
+    }else{
+        //不存在进行正常扫描
+        [self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:ST_SERVICE_UUID]] options:nil];
+    }
     
     if (!self.timer) {
         countDown = 8;
@@ -181,7 +205,7 @@
         [self.delegate onConnectBreak];
     }
 }
-
+//连接成功
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral{
     NSLog(@"didConnectPeripheral");
     if ([self.delegate respondsToSelector:@selector(onConnected)]) {
@@ -190,6 +214,10 @@
     [self.centralManager stopScan];
     peripheral.delegate = self;
     [peripheral discoverServices:nil];
+    NSString *uuid =[peripheral.identifier UUIDString];
+    //存储字段
+    [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:ST_DEVICEIDENTIFI_ID];
+    
 }
 #pragma mark - Peripheral delegate methods
 
